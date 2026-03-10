@@ -4521,7 +4521,7 @@ function Library:Window(p)
 				firsttime = true
 				Tabs:Notify({
 					Title = 'SynezHub',
-					Desc = 'Press the <font color="#b413ff" size="14">('..tostring(Keybind):gsub("Enum.KeyCode.", "")..')</font> button to hide and show the UI',
+					Desc = 'Press the <font color="#ffffff" size="14">('..tostring(Keybind):gsub("Enum.KeyCode.", "")..')</font> button to hide and show the UI',
 					Time = 10
 				})
 			end
