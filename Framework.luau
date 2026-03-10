@@ -2,83 +2,7 @@ Library = {}
 SaveTheme = {}
 
 local themes = {
-	index = {'Dark', 'Amethyst'},
-	Amethyst = {
-		['Shadow'] = Color3.fromRGB(24, 24, 31),
-		['Background'] = Color3.fromRGB(29, 28, 38),
-		['Page'] = Color3.fromRGB(24, 24, 31),
-		['Main'] = Color3.fromRGB(91, 68, 209),
-		['Text & Icon'] = Color3.fromRGB(255, 255, 255),
-		['Function'] = {
-			['Toggle'] = {
-				['Background'] = Color3.fromRGB(29, 28, 38),
-				['True'] = {
-					['Toggle Background'] = Color3.fromRGB(44, 34, 103),
-					['Toggle Value'] = Color3.fromRGB(91, 68, 209),
-				},
-				['False'] = {
-					['Toggle Background'] = Color3.fromRGB(36, 35, 48),
-					['Toggle Value'] = Color3.fromRGB(44, 42, 62),
-				}
-			},
-			['Label'] = {
-				['Background'] = Color3.fromRGB(29, 28, 38),
-			},
-			['Dropdown'] = {
-				['Background'] = Color3.fromRGB(29, 28, 38),
-				['Value Background'] = Color3.fromRGB(24, 24, 31),
-				['Value Stroke'] = Color3.fromRGB(255, 255, 255),
-				['Dropdown Select'] = {
-					['Background'] = Color3.fromRGB(24, 24, 31),
-					['Search'] = Color3.fromRGB(35, 35, 42),
-					['Item Background'] = Color3.fromRGB(45, 45, 52),
-				}
-			},
-			['Slider'] = {
-				['Background'] = Color3.fromRGB(29, 28, 38),
-				['Value Background'] = Color3.fromRGB(24, 24, 31),
-				['Value Stroke'] = Color3.fromRGB(255, 255, 255),
-				['Slider Bar'] = Color3.fromRGB(44, 34, 103),
-				['Slider Bar Value'] = Color3.fromRGB(91, 68, 209),
-				['Circle Value'] = Color3.fromRGB(255, 255, 255)
-			},
-			['Code'] = {
-				['Background'] = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(29, 28, 38)), ColorSequenceKeypoint.new(1, Color3.fromRGB(29, 28, 38))},
-				['Background Code'] = Color3.fromRGB(51, 62, 68),
-				['Background Code Value'] = Color3.fromRGB(38, 50, 56),
-				['ScrollingFrame Code'] = Color3.fromRGB(216, 150, 179)
-			},
-			['Button'] = {
-				['Background'] = Color3.fromRGB(29, 28, 38),
-				['Click'] = Color3.fromRGB(255, 255, 255)
-			},
-			['Textbox'] = {
-				['Background'] = Color3.fromRGB(29, 28, 38),
-				['Value Background'] = Color3.fromRGB(24, 24, 31),
-				['Value Stroke'] = Color3.fromRGB(255, 255, 255),
-			},
-			['Keybind'] = {
-				['Background'] = Color3.fromRGB(29, 28, 38),
-				['Value Background'] = Color3.fromRGB(24, 24, 31),
-				['Value Stroke'] = Color3.fromRGB(255, 255, 255),
-				['True'] = {
-					['Toggle Background'] = Color3.fromRGB(44, 34, 103),
-					['Toggle Value'] = Color3.fromRGB(91, 68, 209),
-				},
-				['False'] = {
-					['Toggle Background'] = Color3.fromRGB(36, 35, 48),
-					['Toggle Value'] = Color3.fromRGB(44, 42, 62),
-				}
-			},
-			['Color Picker'] = {
-				['Background'] = Color3.fromRGB(29, 28, 38),
-				['Color Select'] = {
-					['Background'] = Color3.fromRGB(24, 24, 31),
-					['UIStroke'] = Color3.fromRGB(255, 255, 255),
-				}
-			}
-		}
-	},
+	index = {'Dark'},
 	Dark = {
 		['Shadow'] = Color3.fromRGB(15, 15, 15),
 		['Background'] = Color3.fromRGB(20, 20, 20),
@@ -183,22 +107,18 @@ do
 			local color = getColorFromPath(st, name)
 			if color then
 				for _, obj in pairs(objs) do
-					if SaveTheme[name] then
-						for _, obj in pairs(SaveTheme[name]) do
-							if obj:IsA("Frame") or obj:IsA("CanvasGroup") then
-								obj.BackgroundColor3 = color
-							elseif obj:IsA("TextLabel") or obj:IsA("TextButton") or obj:IsA("TextBox") then
-								obj.TextColor3 = color
-							elseif obj:IsA("ImageLabel") or obj:IsA("ImageButton") then
-								obj.ImageColor3 = color
-							elseif obj:IsA("ScrollingFrame") then
-								obj.ScrollBarImageColor3 = color
-							elseif obj:IsA("UIStroke") then
-								obj.Color = color
-							elseif obj:IsA("UIGradient") then
-								obj.Color = color
-							end
-						end
+					if obj:IsA("Frame") or obj:IsA("CanvasGroup") then
+						obj.BackgroundColor3 = color
+					elseif obj:IsA("TextLabel") or obj:IsA("TextButton") or obj:IsA("TextBox") then
+						obj.TextColor3 = color
+					elseif obj:IsA("ImageLabel") or obj:IsA("ImageButton") then
+						obj.ImageColor3 = color
+					elseif obj:IsA("ScrollingFrame") then
+						obj.ScrollBarImageColor3 = color
+					elseif obj:IsA("UIStroke") then
+						obj.Color = color
+					elseif obj:IsA("UIGradient") then
+						obj.Color = color
 					end
 				end
 			end
@@ -495,7 +415,7 @@ do
 			end)
 		end
 
-		delay(.1, updateSize)
+		task.delay(.1, updateSize)
 
 		UIListLayout_2:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(updateSize)
 
@@ -975,7 +895,7 @@ do
 				return false
 			end
 
-			delay(0,function()
+			task.delay(0,function()
 				if Multi then
 					if isValueInTable(text, Value) then
 						hasselect()
@@ -1269,7 +1189,7 @@ function Library:Window(p)
 	Title_1.Name = "Title"
 	Title_1.Parent = Td_1
 	Title_1.BackgroundColor3 = Color3.fromRGB(255,255,255)
-	Title_1.BackgroundTransparency = 4
+	Title_1.BackgroundTransparency = 1
 	Title_1.BorderColor3 = Color3.fromRGB(0,0,0)
 	Title_1.BorderSizePixel = 0
 	Title_1.LayoutOrder = 1
@@ -1665,7 +1585,7 @@ function Library:Window(p)
 
 		changecanvas(ScrollingFrame_1, UIListLayout_1, 5)
 
-		delay(.1, function()
+		task.delay(.1, function()
 			if not self.Value then
 				local total = #self.List
 				local index = self.DefaultIndex
@@ -1842,7 +1762,7 @@ function Library:Window(p)
 
 			Click.MouseButton1Click:Connect(change)
 
-			delay(0.1, change)
+			task.delay(0.1, change)
 
 			local New = {}
 
@@ -1949,7 +1869,7 @@ function Library:Window(p)
 				Button.Position = UDim2.new(0.5, 0, 0.5,0)
 				jc(Click, Button)
 				tw({v = Button, t = 0.15, s = Enum.EasingStyle.Back, d = "Out", g = {Size = UDim2.new(.9, 0,.9, 0)}}):Play()
-				delay(.06, function()
+				task.delay(.06, function()
 					tw({v = Button, t = 0.15, s = Enum.EasingStyle.Back, d = "Out", g = {Size = UDim2.new(1, 0,1, 0)}}):Play()
 				end)
 				pcall(Callback)
@@ -2697,7 +2617,7 @@ function Library:Window(p)
 					ImageLabel_1.Image = "rbxassetid://14939475472"
 					Frame_5.Size = UDim2.new(0, 65,0, 30)
 					iscop = true
-					delay(1, function()
+					task.delay(1, function()
 						TextButton_1.Text = "Copy"
 						ImageLabel_1.Image = "rbxassetid://13847222481"
 						Frame_5.Size = UDim2.new(0, 58,0, 30)
@@ -2933,7 +2853,7 @@ function Library:Window(p)
 
 			Click.MouseButton1Click:Connect(change)
 
-			delay(0.1, change)
+			task.delay(0.1, change)
 
 			local changeing = false
 
@@ -2968,7 +2888,7 @@ function Library:Window(p)
 				end
 			end)
 
-			delay(0, function()
+			task.delay(0, function()
 				pcall(Callback, Key, Value)
 			end)
 
@@ -3093,7 +3013,7 @@ function Library:Window(p)
 			local HueGradient_1 = Instance.new("UIGradient")
 			local HueSelection_1 = Instance.new("ImageLabel")
 
-			lak(ColorpickBar)
+			lak(ColorpickBar, ColorpickBar)
 
 			ColorpickBar.Name = "ColorpickBar"
 			ColorpickBar.Parent = ScreenGui
@@ -3746,7 +3666,7 @@ function Library:Window(p)
 				end)
 			end
 
-			delay(0,function()
+			task.delay(0,function()
 				ColorH, ColorS, ColorV = Color3.toHSV(Picker_1.BackgroundColor3)
 				UpdateColorPicker(true)
 				local r, g, b = Picker_1.BackgroundColor3.R * 255, Picker_1.BackgroundColor3.G * 255, Picker_1.BackgroundColor3.B * 255
@@ -3868,7 +3788,7 @@ function Library:Window(p)
 			ImageLabel_1.Image = "rbxassetid://13868675087"
 			ImageLabel_1.ImageTransparency = 0.30000001192092896
 
-			addToTheme('Text & Value', ImageLabel_1)
+			addToTheme('Text & Icon', ImageLabel_1)
 
 			TextLabel_1.Name = "TextLabel"
 			TextLabel_1.Parent = Frame_1
@@ -3887,9 +3807,9 @@ function Library:Window(p)
 			TextLabel_1.TextTransparency = 0.30000001192092896
 			TextLabel_1.TextWrapped = true
 			TextLabel_1.TextXAlignment = Enum.TextXAlignment.Left
-			TextLabel_1.ClearTextOnFocus = not ClearText
+			TextLabel_1.ClearTextOnFocus = ClearText
 
-			addToTheme('Text & Value', TextLabel_1)
+			addToTheme('Text & Icon', TextLabel_1)
 
 			Frame_2.Parent = Frame_1
 			Frame_2.AnchorPoint = Vector2.new(0.5, 1)
@@ -3908,7 +3828,7 @@ function Library:Window(p)
 
 			TextLabel_1.FocusLost:Connect(o)
 
-			delay(0, o)
+			task.delay(0, o)
 
 			local New = {}
 
@@ -3929,11 +3849,125 @@ function Library:Window(p)
 			end
 
 			function New:SetClearTextOnFocus(t)
-				TextLabel_1.ClearTextOnFocus = not t
+				TextLabel_1.ClearTextOnFocus = t
 			end
 
 			function New:SetPlaceholderText(t)
 				TextLabel_1.PlaceholderText = t
+			end
+
+			return New
+		end
+
+		function Func:Progress(p)
+			local Title = p.Title or 'null'
+			local Desc = p.Desc or ''
+			local Image = p.Image or ''
+			local Value = math.clamp(p.Value or 0, 0, 100)
+			local Suffix = p.Suffix or '%'
+
+			local Progress, Config = background(ScrollingFrame_1, Title, Desc, Image, 'Slider')
+
+			Config:SetTextTransparencyTitle(0)
+			Config:SetSizeT(120)
+
+			local F = Instance.new("Frame")
+			local UIPadding_1 = Instance.new("UIPadding")
+			local Frame_1 = Instance.new("Frame")
+			local Frame_2 = Instance.new("Frame")
+			local UICorner_1 = Instance.new("UICorner")
+			local Frame_3 = Instance.new("Frame")
+			local UICorner_2 = Instance.new("UICorner")
+			local TextLabel_1 = Instance.new("TextLabel")
+
+			F.Name = "F"
+			F.Parent = Progress
+			F.AnchorPoint = Vector2.new(1, 0.5)
+			F.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			F.BackgroundTransparency = 1
+			F.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			F.BorderSizePixel = 0
+			F.Position = UDim2.new(1, 0, 0.5, 0)
+			F.Size = UDim2.new(0, 120, 0.8, 0)
+
+			UIPadding_1.Parent = F
+			UIPadding_1.PaddingRight = UDim.new(0, 13)
+
+			Frame_1.Parent = F
+			Frame_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Frame_1.BackgroundTransparency = 1
+			Frame_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Frame_1.BorderSizePixel = 0
+			Frame_1.AnchorPoint = Vector2.new(0.5, 0.5)
+			Frame_1.Position = UDim2.new(0.5, 0, 0.5, 0)
+			Frame_1.Size = UDim2.new(1, 0, 0, 20)
+
+			Frame_2.Parent = Frame_1
+			Frame_2.AnchorPoint = Vector2.new(0.5, 0.5)
+			Frame_2.BackgroundColor3 = Color3.fromRGB(44, 34, 103)
+			Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Frame_2.BorderSizePixel = 0
+			Frame_2.Position = UDim2.new(0.5, 0, 0.5, 0)
+			Frame_2.Size = UDim2.new(1, 0, 0, 6)
+
+			addToTheme('Function.Slider.Slider Bar', Frame_2)
+
+			UICorner_1.Parent = Frame_2
+			UICorner_1.CornerRadius = UDim.new(1, 0)
+
+			Frame_3.Parent = Frame_2
+			Frame_3.AnchorPoint = Vector2.new(0, 0.5)
+			Frame_3.BackgroundColor3 = Color3.fromRGB(91, 68, 209)
+			Frame_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Frame_3.BorderSizePixel = 0
+			Frame_3.Position = UDim2.new(0, 0, 0.5, 0)
+			Frame_3.Size = UDim2.new(math.clamp(Value / 100, 0, 1), 0, 1, 0)
+
+			addToTheme('Function.Slider.Slider Bar Value', Frame_3)
+
+			UICorner_2.Parent = Frame_3
+			UICorner_2.CornerRadius = UDim.new(1, 0)
+
+			TextLabel_1.Parent = Frame_1
+			TextLabel_1.AnchorPoint = Vector2.new(0.5, 0)
+			TextLabel_1.BackgroundTransparency = 1
+			TextLabel_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			TextLabel_1.BorderSizePixel = 0
+			TextLabel_1.Position = UDim2.new(0.5, 0, 1, 2)
+			TextLabel_1.Size = UDim2.new(1, 0, 0, 12)
+			TextLabel_1.Font = Enum.Font.GothamBold
+			TextLabel_1.Text = tostring(math.floor(Value)) .. Suffix
+			TextLabel_1.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel_1.TextSize = 9
+			TextLabel_1.TextTransparency = 0.4
+			TextLabel_1.TextXAlignment = Enum.TextXAlignment.Center
+
+			addToTheme('Text & Icon', TextLabel_1)
+
+			local New = {}
+
+			function New:SetTitle(t)
+				Config:SetTitle(t)
+			end
+
+			function New:SetDesc(t)
+				Config:SetDesc(t)
+			end
+
+			function New:SetVisible(t)
+				Progress.Visible = t
+			end
+
+			function New:SetValue(t)
+				t = math.clamp(t, 0, 100)
+				Value = t
+				tw({v = Frame_3, t = 0.3, s = Enum.EasingStyle.Exponential, d = "Out", g = {Size = UDim2.new(math.clamp(t / 100, 0, 1), 0, 1, 0)}}):Play()
+				TextLabel_1.Text = tostring(math.floor(t)) .. Suffix
+			end
+
+			function New:SetSuffix(t)
+				Suffix = t
+				TextLabel_1.Text = tostring(math.floor(Value)) .. Suffix
 			end
 
 			return New
@@ -4127,7 +4161,7 @@ function Library:Window(p)
 			end)
 		end
 
-		delay(.1, updateSize)
+		task.delay(.1, updateSize)
 
 		UIListLayout_1:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(updateSize)
 
@@ -4353,7 +4387,7 @@ function Library:Window(p)
 		Click1.MouseButton1Click:Connect(function()
 			pcall(Button1)
 			tw({v = TextLabel_2, t = 0.15, s = Enum.EasingStyle.Back, d = "Out", g = {TextSize = TextLabel_2.TextSize - 2}}):Play()
-			delay(.06, function()
+			task.delay(.06, function()
 				tw({v = TextLabel_2, t = 0.15, s = Enum.EasingStyle.Back, d = "Out", g = {TextSize = 16}}):Play()
 			end)
 			local f = tw({v = Dialog, t = 0.25, s = Enum.EasingStyle.Linear, d = "Out", g = {GroupTransparency = 1}})
@@ -4365,7 +4399,7 @@ function Library:Window(p)
 		Click2.MouseButton1Click:Connect(function()
 			pcall(Button2)
 			tw({v = TextLabel_3, t = 0.15, s = Enum.EasingStyle.Back, d = "Out", g = {TextSize = TextLabel_3.TextSize - 2}}):Play()
-			delay(.06, function()
+			task.delay(.06, function()
 				tw({v = TextLabel_3, t = 0.15, s = Enum.EasingStyle.Back, d = "Out", g = {TextSize = 16}}):Play()
 			end)
 			local f = tw({v = Dialog, t = 0.25, s = Enum.EasingStyle.Linear, d = "Out", g = {GroupTransparency = 1}})
@@ -4715,7 +4749,7 @@ function Library:Window(p)
 			lak(Click, CloseUIShadow)
 			Click.MouseButton1Click:Connect(function()
 				tw({v = Title_1, t = 0.15, s = Enum.EasingStyle.Back, d = "Out", g = {TextSize = Title_1.TextSize - 2}}):Play()
-				delay(.06, function()
+				task.delay(.06, function()
 					tw({v = Title_1, t = 0.15, s = Enum.EasingStyle.Back, d = "Out", g = {TextSize = 12}}):Play()
 				end)
 				pcall(closeui)
